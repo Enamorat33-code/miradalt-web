@@ -3,154 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Miradalt | Astroturismo en viñedo</title>
+<title>Miradalt</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Inter&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
+
 body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-    background: #0b0f1a;
-    color: white;
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0a0d14;
+  color: white;
 }
 
 h1, h2 {
-    font-family: 'Playfair Display', serif;
+  font-family: 'Playfair Display', serif;
 }
 
-header {
-    height: 100vh;
-    background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.9)),
-    url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee');
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
+/* HERO CINEMÁTICO */
+.hero {
+  height: 100vh;
+  background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
 }
 
-header h1 {
-    font-size: 3.5em;
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
 }
 
-.btn {
-    background: #c9a96e;
-    padding: 14px 28px;
-    border-radius: 30px;
-    color: black;
-    text-decoration: none;
-    margin-top: 20px;
-    display: inline-block;
+.hero-content {
+  position: relative;
+  z-index: 2;
 }
 
+.hero h1 {
+  font-size: 4.5em;
+}
+
+.subtitle {
+  opacity: 0.8;
+}
+
+.cta {
+  margin-top: 30px;
+  background: #c9a96e;
+  color: black;
+  padding: 14px 30px;
+  border-radius: 30px;
+  text-decoration: none;
+}
+
+/* BLOQUES GRANDES */
 .section {
-    padding: 80px 20px;
-    max-width: 900px;
-    margin: auto;
-    text-align: center;
+  padding: 140px 20px;
+  max-width: 900px;
+  margin: auto;
+  text-align: center;
 }
 
+.statement {
+  font-size: 2em;
+  line-height: 1.6;
+}
+
+/* SECCIÓN IMAGEN FULL */
+.full-image {
+  height: 70vh;
+  background-size: cover;
+  background-position: center;
+}
+
+/* EXPERIENCIAS */
 .cards {
-    display: grid;
-    gap: 20px;
+  display: grid;
+  gap: 25px;
 }
 
 .card {
-    background: #111;
-    padding: 20px;
-    border-radius: 12px;
+  background: #111;
+  padding: 30px;
+  border-radius: 15px;
 }
 
+/* FOOTER */
 .footer {
-    background: black;
-    padding: 30px;
-    text-align: center;
-    font-size: 0.8em;
+  text-align: center;
+  padding: 60px;
+  opacity: 0.6;
 }
+
 </style>
+    .logo {
+  width: 180px;
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: logoFade 1.5s ease forwards;
+}
+
+@keyframes logoFade {
+  to {
+    opacity: 0.9;
+    transform: translateY(0);
+  }
+}
 </head>
 
 <body>
 
-<header>
-<h1>Miradalt</h1>
-<p>Experiencias bajo las estrellas en un viñedo vivo</p>
-<a href="#reservas" class="btn">Reservar experiencia</a>
-</header>
+<!-- HERO -->
+<div class="hero">
+<div class="hero-content">
+<img src="logo.png" class="logo" alt="Miradalt">
+<p class="subtitle">Donde el viñedo se encuentra con las estrellas</p>
 
+<p class="statement">
+No estamos bajo el cielo.<br>
+Somos parte de él.<br>
+Mirar es recordarlo.
+</p>
+
+<a href="#reservas" class="cta">Reservar experiencia</a>
+</div>
+</div>
+
+<!-- IDENTIDAD -->
 <section class="section">
-<h2>Un lugar donde la tierra y el cielo se encuentran</h2>
-<p>
-En Miradalt recuperamos un viñedo tradicional en Requena para ofrecer experiencias únicas de astroturismo, sostenibilidad y paisaje.
+<p class="statement">
+Un viñedo en la Tierra.<br>
+Un cielo en movimiento.<br>
+Un instante donde todo coincide.
 </p>
 </section>
 
+<!-- IMAGEN -->
+<div class="full-image" style="background-image:url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e')"></div>
+
+<!-- CONCEPTO -->
+<section class="section">
+<p class="statement">
+El cielo no está fuera.<br>
+Es un proceso en el que participas.<br>
+Mirar alto es recordarlo.
+</p>
+</section>
+
+<!-- EXPERIENCIAS -->
 <section class="section">
 <h2>Experiencias</h2>
 
 <div class="cards">
-
 <div class="card">
-<h3>🌌 Cielo de Miradalt</h3>
-<p>Descubre las estrellas en un entorno rural único.</p>
-<p><strong>20€ por persona</strong></p>
-<a href="#reservas" class="btn">Reservar</a>
+<h3>Cielo de Miradalt</h3>
+<p>19€</p>
 </div>
 
 <div class="card">
-<h3>🍷 Vino & Estrellas</h3>
-<p>Observación del cielo + cata de vino local bajo las estrellas.</p>
-<p><strong>40€ por persona</strong></p>
-<a href="#reservas" class="btn">Reservar</a>
+<h3>Viñedo & Estrellas</h3>
+<p>39€</p>
 </div>
 
 <div class="card">
-<h3>🌿 Experiencia privada</h3>
-<p>Una noche exclusiva en el viñedo solo para tu grupo.</p>
-<p><strong>Desde 150€</strong></p>
-<a href="#reservas" class="btn">Reservar</a>
-</div>
-
-</div>
-</section>
-
-<div class="cards">
-<div class="card">
-<h3>🌌 Observación del cielo</h3>
-<p>Sesiones guiadas con monitora certificada.</p>
-</div>
-
-<div class="card">
-<h3>🍇 Cata bajo las estrellas</h3>
-<p>Vino local en un entorno natural único.</p>
-</div>
-
-<div class="card">
-<h3>🚶 Paseo por el viñedo</h3>
-<p>Interpretación del paisaje agrícola.</p>
+<h3>Experiencia privada</h3>
+<p>Desde 150€</p>
 </div>
 </div>
 
 </section>
 
-<section class="section" id="reservas">
-<h2>Reservas</h2>
-<p>Selecciona tu fecha y te confirmaremos disponibilidad</p>
-
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdFORMULARIO/viewform?embedded=true" width="100%" height="600" frameborder="0">Cargando…</iframe>
-
-</section>
-
+<!-- FRASE FINAL -->
 <section class="section">
-<h2>Ubicación</h2>
-<p>Requena · Valencia</p>
+<p class="statement">
+El universo no está separado de ti.<br>
+Solo necesitas detenerte… y mirar.
+</p>
+
+<a href="#reservas" class="cta">Reservar</a>
 </section>
 
+<!-- RESERVAS -->
+<section class="section" id="reservas">
+<h2>Reserva</h2>
+
+<iframe src="https://docs.google.com/forms/d/e/FORMULARIO/viewform?embedded=true"
+width="100%" height="600"></iframe>
+
+</section>
+
+<!-- FOOTER -->
 <div class="footer">
-© 2026 Miradalt · Proyecto rural sostenible
+Miradalt · Requena · España
 </div>
 
 </body>
