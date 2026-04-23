@@ -1,246 +1,256 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Próximamente</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Próximamente</title>
 
-<meta name="description" content="Algo único está en camino">
-<link rel="icon" href="logo.webp">
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
 
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
+    body{
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+      color:#fff;
+      overflow-x:hidden;
+    }
 
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
-  color:#fff;
-  height:100vh;
-  overflow:hidden;
-  animation:fadeBody 1s ease;
-}
+    /* FONDO */
+    .bg{
+      position:fixed;
+      inset:0;
+      background:url('fondo.jpg') center top / cover no-repeat;
+      transform:scale(1.08);
+      z-index:-2;
+      transition:transform .2s ease-out;
+    }
 
-@keyframes fadeBody{from{opacity:0}to{opacity:1}}
+    /* LUZ MEJORADA (más visible el cielo) */
+    .overlay{
+      position:fixed;
+      inset:0;
+      background:linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.5) 50%,
+        rgba(0,0,0,0.85) 100%
+      );
+      backdrop-filter:blur(5px);
+      z-index:-1;
+    }
 
-.bg{
-  position:fixed;
-  inset:0;
-  background:url('fondo.jpg') center/cover no-repeat;
-  transform:scale(1.15);
-  animation:zoom 30s ease-in-out infinite alternate;
-}
+    .container{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:20px;
+      max-width:800px;
+      margin:auto;
+    }
 
-@keyframes zoom{from{transform:scale(1.15)}to{transform:scale(1.3)}}
+    .logo{
+      width:260px;
+      margin-bottom:25px;
+    }
 
-.overlay{
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle at center, rgba(0,0,0,.3), rgba(0,0,0,.95));
-  backdrop-filter:blur(10px);
-}
+    h2{
+      letter-spacing:6px;
+      font-weight:300;
+      margin-bottom:20px;
+    }
 
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:1;
-}
+    p{
+      opacity:.9;
+      margin-bottom:35px;
+      line-height:1.5;
+    }
 
-.container{
-  position:relative;
-  z-index:2;
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:20px;
-  animation:fadeIn 1.5s ease;
-}
+    .form{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      justify-content:center;
+      width:100%;
+    }
 
-@keyframes fadeIn{from{opacity:0;transform:translateY(30px)}to{opacity:1}}
+    input{
+      padding:16px 20px;
+      border-radius:40px;
+      border:1px solid rgba(255,255,255,.25);
+      background:rgba(255,255,255,.08);
+      color:#fff;
+      min-width:260px;
+      width:60%;
+      backdrop-filter:blur(10px);
+    }
 
-.logo{
-  width:220px;
-  margin-bottom:30px;
-  filter:drop-shadow(0 20px 40px rgba(255,255,255,.2));
-}
+    input::placeholder{color:rgba(255,255,255,.6)}
 
-h2{
-  letter-spacing:10px;
-  font-weight:200;
-  margin-bottom:20px;
-}
+    button{
+      padding:16px 28px;
+      border-radius:40px;
+      border:none;
+      background:linear-gradient(135deg,#d4a373,#b08968);
+      color:#000;
+      font-weight:600;
+      cursor:pointer;
+      transition:.3s;
+    }
 
-p{opacity:.85;margin-bottom:30px}
+    button:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 40px rgba(212,163,115,.5);
+    }
 
-.countdown{margin-bottom:30px;letter-spacing:3px}
+    .success{
+      margin-top:15px;
+      display:none;
+      opacity:.85;
+    }
 
-.form{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+    .note{
+      font-size:.75rem;
+      opacity:.6;
+      margin-top:10px;
+    }
 
-input{
-  padding:16px 20px;
-  border-radius:40px;
-  border:1px solid rgba(255,255,255,.2);
-  background:rgba(255,255,255,.08);
-  color:#fff;
-  min-width:260px;
-  backdrop-filter:blur(12px);
-  transition:.3s;
-}
+    .instagram{
+      margin-top:50px;
+    }
 
-input:focus{
-  outline:none;
-  border-color:#d4a373;
-  box-shadow:0 0 20px rgba(212,163,115,.4);
-}
+    .instagram img{
+      width:160px;
+      border-radius:20px;
+      margin-bottom:15px;
+    }
 
-button{
-  padding:16px 28px;
-  border-radius:40px;
-  border:none;
-  background:linear-gradient(135deg,#d4a373,#b08968);
-  font-weight:bold;
-  cursor:pointer;
-  transition:.3s;
-  box-shadow:0 10px 40px rgba(212,163,115,.4);
-}
+    .ig-btn{
+      display:inline-block;
+      padding:12px 20px;
+      border:1px solid rgba(255,255,255,.3);
+      border-radius:30px;
+      text-decoration:none;
+      color:#fff;
+      font-size:.9rem;
+    }
 
-button:hover{
-  transform:translateY(-3px) scale(1.07);
-  box-shadow:0 20px 80px rgba(212,163,115,.6);
-}
+    .features{
+      margin-top:60px;
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:30px;
+      width:100%;
+    }
 
-.success{
-  margin-top:20px;
-  display:none;
-  opacity:.8;
-}
+    .feature{opacity:.85}
 
-.instagram{margin-top:40px}
-.instagram img{width:140px;border-radius:20px;box-shadow:0 10px 30px rgba(0,0,0,.6)}
+    .feature h4{margin-bottom:8px;letter-spacing:2px}
 
-footer{position:absolute;bottom:20px;font-size:.7rem;opacity:.5}
+    footer{
+      margin-top:40px;
+      font-size:.7rem;
+      opacity:.5;
+    }
 
-@media(max-width:600px){
-  .logo{width:160px}
-  input{min-width:100%}
-  .form{flex-direction:column}
-  button{width:100%}
-}
-</style>
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .features{grid-template-columns:1fr}
+    }
+
+    @media(max-width:600px){
+      .logo{width:180px}
+      input{width:100%}
+      .form{flex-direction:column}
+      button{width:100%}
+    }
+
+  </style>
 </head>
 <body>
 
-<canvas id="stars"></canvas>
-<div class="bg"></div>
+<div class="bg" id="bg"></div>
 <div class="overlay"></div>
 
 <div class="container">
-<img src="logo.webp" class="logo" />
+
+<img src="logo.webp" class="logo">
+
 <h2>PRÓXIMAMENTE</h2>
+
 <p>Algo único está en camino.<br>Diseñado para quienes miran más allá.</p>
 
-<div class="countdown" id="countdown"></div>
-
 <form class="form" id="form">
-<input type="email" id="email" placeholder="Tu correo electrónico" required />
-<button>AVÍSAME</button>
+  <input type="email" id="email" placeholder="Tu correo electrónico" required>
+  <button>AVÍSAME</button>
 </form>
 
 <div class="success" id="success">✔️ Estás dentro. Te avisaremos.</div>
 
+<div class="note">No compartiremos tu información.</div>
+
 <div class="instagram">
-<p>Síguenos en Instagram</p>
-<img src="qr.png" />
+  <p>Síguenos en Instagram</p>
+  <img src="qr.png">
+  <br>
+  <a class="ig-btn" href="https://instagram.com/miradalt" target="_blank">Seguir en Instagram</a>
+</div>
+
+<div class="features">
+  <div class="feature">
+    <h4>INSPIRACIÓN</h4>
+    <p>Creamos con propósito.</p>
+  </div>
+  <div class="feature">
+    <h4>CALIDAD</h4>
+    <p>Detalles que marcan la diferencia.</p>
+  </div>
+  <div class="feature">
+    <h4>VISIÓN</h4>
+    <p>Miramos hacia el futuro.</p>
+  </div>
 </div>
 
 <footer>© 2026</footer>
+
 </div>
 
 <script>
-// COUNTDOWN
-const date=new Date("2026-06-01").getTime();
-setInterval(()=>{
-const now=new Date().getTime();
-const d=date-now;
-if(d<0)return document.getElementById('countdown').innerHTML='Ya disponible';
-const days=Math.floor(d/(1000*60*60*24));
-const h=Math.floor((d%(1000*60*60*24))/(1000*60*60));
-const m=Math.floor((d%(1000*60*60))/(1000*60));
-document.getElementById('countdown').innerHTML=`${days}d ${h}h ${m}m`;
-},1000);
 
-// STARS
-const canvas=document.getElementById('stars');
-const ctx=canvas.getContext('2d');
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+// PARALLAX SOLO CIELO
+window.addEventListener('scroll',()=>{
+  const scroll=window.scrollY;
+  document.getElementById('bg').style.transform=`translateY(${scroll*0.25}px) scale(1.08)`;
+});
 
-let stars=Array.from({length:120},()=>({
-  x:Math.random()*canvas.width,
-  y:Math.random()*canvas.height,
-  r:Math.random()*1.2,
-  d:Math.random()*0.5
-}));
+// FORM → FORMSPREE
 
-function draw(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  ctx.fillStyle='white';
-  stars.forEach(s=>{
-    ctx.beginPath();
-    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
-    ctx.fill();
-  });
-  move();
-}
-
-function move(){
-  stars.forEach(s=>{
-    s.y+=s.d;
-    if(s.y>canvas.height){
-      s.y=0;
-      s.x=Math.random()*canvas.width;
-    }
-  });
-}
-
-setInterval(draw,33);
-
-// FORM → FORMSPREE + UX PRO
-
-document.getElementById('form').addEventListener('submit', async e => {
+document.getElementById('form').addEventListener('submit', async e=>{
   e.preventDefault();
 
-  const email = document.getElementById('email').value;
-  const btn = document.querySelector('button');
+  const email=document.getElementById('email').value;
+  const btn=document.querySelector('button');
 
-  btn.innerHTML = 'Enviando...';
-  btn.disabled = true;
+  btn.innerHTML='Enviando...';
+  btn.disabled=true;
 
-  try {
-    await fetch('https://formspree.io/f/xgorrabn', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email })
+  try{
+    await fetch('https://formspree.io/f/xgorrabn',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email})
     });
 
-    document.getElementById('success').style.display = 'block';
-  } catch {
-    alert('Error. Inténtalo de nuevo');
+    document.getElementById('success').style.display='block';
+  }catch{
+    alert('Error, intenta de nuevo');
   }
 
-  btn.innerHTML = 'AVÍSAME';
-  btn.disabled = false;
+  btn.innerHTML='AVÍSAME';
+  btn.disabled=false;
 });
 
-// PARALLAX
-window.addEventListener('deviceorientation',e=>{
-  const x=e.gamma/30;
-  const y=e.beta/50;
-  document.querySelector('.bg').style.transform=`scale(1.2) translate(${x}px,${y}px)`;
-});
 </script>
 
 </body>
