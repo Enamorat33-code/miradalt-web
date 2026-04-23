@@ -16,14 +16,12 @@ body{
   overflow-x:hidden;
 }
 
-/* FONDO + PARALLAX MOUSE */
 .bg{
   position:fixed;
   inset:0;
   background:url('fondo.jpg') center top / cover no-repeat;
   filter:brightness(1.15) contrast(1.2) saturate(1.1);
-  transform:scale(1.05);
-  transition:transform .2s ease-out;
+  transform:scale(1.03);
   z-index:-2;
 }
 
@@ -33,7 +31,7 @@ body{
   background:linear-gradient(
     to bottom,
     rgba(0,0,0,0.05) 0%,
-    rgba(0,0,0,0.25) 40%,
+    rgba(0,0,0,0.3) 40%,
     rgba(0,0,0,0.85) 100%
   );
   z-index:-1;
@@ -54,18 +52,18 @@ body{
 .logo{
   width:300px;
   margin-bottom:10px;
-  animation:fadeUp 1.2s ease;
 }
 
 h2{
   letter-spacing:8px;
   font-weight:300;
-  margin-bottom:10px;
+  margin-bottom:15px;
 }
 
+/* COPY MÁS DIRECTO (CONVERSIÓN) */
 .main-copy{
   font-size:1.05rem;
-  margin-bottom:20px;
+  margin-bottom:25px;
   opacity:.95;
 }
 
@@ -76,7 +74,6 @@ h2{
   opacity:.7;
 }
 
-/* CTA DESTACADO */
 .form{
   display:flex;
   gap:10px;
@@ -91,7 +88,15 @@ input{
   border:1px solid rgba(255,255,255,.4);
   background:rgba(0,0,0,.5);
   color:#fff;
+  min-width:260px;
   width:65%;
+  transition:.3s;
+}
+
+input:focus{
+  outline:none;
+  border-color:#c89b5a;
+  box-shadow:0 0 15px rgba(200,155,90,.4);
 }
 
 button{
@@ -103,23 +108,18 @@ button{
   font-weight:600;
   cursor:pointer;
   transition:.3s;
-  animation:pulse 2.5s infinite;
 }
 
 button:hover{
-  transform:scale(1.05);
-  box-shadow:0 15px 60px rgba(200,155,90,.7);
-}
-
-@keyframes pulse{
-  0%{box-shadow:0 0 0 rgba(200,155,90,0)}
-  50%{box-shadow:0 0 40px rgba(200,155,90,.4)}
-  100%{box-shadow:0 0 0 rgba(200,155,90,0)}
+  transform:translateY(-2px) scale(1.03);
+  box-shadow:0 15px 50px rgba(200,155,90,.6);
 }
 
 .success{
   margin-top:15px;
   display:none;
+  opacity:.9;
+  font-weight:500;
 }
 
 .note{
@@ -128,34 +128,49 @@ button:hover{
   margin-top:10px;
 }
 
-/* FEATURES */
+.instagram{
+  margin-top:40px;
+}
+
+.instagram img{
+  width:170px;
+  border-radius:20px;
+  margin-bottom:15px;
+}
+
+.ig-btn{
+  display:inline-block;
+  padding:12px 20px;
+  border:1px solid rgba(255,255,255,.4);
+  border-radius:30px;
+  text-decoration:none;
+  color:#fff;
+  font-size:.9rem;
+  transition:.3s;
+}
+
+.ig-btn:hover{
+  background:rgba(255,255,255,.1);
+}
+
 .features{
   margin-top:50px;
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:30px;
+  width:100%;
 }
 
-.feature{
-  opacity:0;
-  transform:translateY(30px);
-  transition:.6s ease;
-}
+.feature{opacity:.9; display:flex; flex-direction:column; align-items:center; gap:10px; transition:transform .4s ease, opacity .4s ease}
+.feature svg{transition:transform .5s cubic-bezier(.22,1,.36,1), filter .5s ease; filter:drop-shadow(0 0 0 rgba(200,155,90,0))}
+.feature:hover{transform:translateY(-6px); opacity:1}
+.feature:hover svg{transform:scale(1.15) rotate(-2deg); filter:drop-shadow(0 8px 18px rgba(200,155,90,.45))}
 
-.feature.visible{
-  opacity:1;
-  transform:translateY(0);
-}
+/* animación suave al entrar */
+.feature{opacity:0; transform:translateY(20px)}
+.feature.visible{opacity:.9; transform:translateY(0)}
 
-.feature svg{
-  margin-bottom:10px;
-  transition:.4s;
-}
-
-.feature:hover svg{
-  transform:scale(1.2);
-  filter:drop-shadow(0 10px 25px rgba(200,155,90,.5));
-}
+.feature h4{margin-bottom:10px;letter-spacing:2px}
 
 footer{
   margin-top:40px;
@@ -163,32 +178,33 @@ footer{
   opacity:.5;
 }
 
-@media(max-width:600px){
-  input{width:100%}
-  button{width:100%}
-  .form{flex-direction:column}
+@media(max-width:900px){
   .features{grid-template-columns:1fr}
 }
 
-@keyframes fadeUp{
-  from{opacity:0; transform:translateY(20px)}
-  to{opacity:1; transform:translateY(0)}
+@media(max-width:600px){
+  .logo{width:200px}
+  input{width:100%}
+  .form{flex-direction:column}
+  button{width:100%}
 }
 
 </style>
 </head>
 <body>
 
-<div class="bg" id="bg"></div>
+<div class="bg"></div>
 <div class="overlay"></div>
 
 <div class="container">
 
-<img src="logo.png" class="logo">
+<img src="logo.webp" class="logo">
 
 <h2>PRÓXIMAMENTE</h2>
 
-<div class="main-copy">Acceso anticipado a algo que no será público.</div>
+<div class="main-copy">
+Acceso anticipado a algo que no será público.
+</div>
 
 <div class="urgency">SÉ DE LOS PRIMEROS</div>
 
@@ -201,67 +217,72 @@ footer{
 
 <div class="note">Sin spam. Solo acceso anticipado.</div>
 
-<div class="features">
+<div class="instagram">
+<p>SÍGUENOS EN INSTAGRAM</p>
+<img src="qr.png">
+<br>
+<a class="ig-btn" href="https://instagram.com/miradalt" target="_blank">Seguir en Instagram</a>
+</div>
 
+<div class="features">
 <div class="feature">
-<svg width="40" height="40" stroke="#c89b5a" fill="none" stroke-width="2"><polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9"></polygon></svg>
+<svg width="40" height="40" fill="none" stroke="#c89b5a" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15 9 22 9 17 14 19 21 12 17 5 21 7 14 2 9 9 9"></polygon></svg>
 <h4>INSPIRACIÓN</h4>
 <p>Creamos con propósito.</p>
 </div>
-
 <div class="feature">
-<svg width="40" height="40" stroke="#c89b5a" fill="none" stroke-width="2"><path d="M12 2C8 8 5 10 5 14a7 7 0 0 0 14 0c0-4-3-6-7-12z"></path></svg>
+<svg width="40" height="40" fill="none" stroke="#c89b5a" stroke-width="2" viewBox="0 0 24 24"><path d="M12 2C8 8 5 10 5 14a7 7 0 0 0 14 0c0-4-3-6-7-12z"></path></svg>
 <h4>CALIDAD</h4>
 <p>Detalles que marcan la diferencia.</p>
 </div>
-
 <div class="feature">
-<svg width="40" height="40" stroke="#c89b5a" fill="none" stroke-width="2"><circle cx="12" cy="12" r="5"></circle></svg>
+<svg width="40" height="40" fill="none" stroke="#c89b5a" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
 <h4>VISIÓN</h4>
 <p>Miramos hacia el futuro.</p>
 </div>
-
 </div>
 
-<footer>© 2026</footer>
+<footer>© 2026 | Todos los derechos reservados</footer>
 
 </div>
 
 <script>
 
-// PARALLAX MOUSE
-window.addEventListener('mousemove',e=>{
-  const x=(e.clientX/window.innerWidth-0.5)*10;
-  const y=(e.clientY/window.innerHeight-0.5)*10;
-  document.getElementById('bg').style.transform=`scale(1.05) translate(${x}px,${y}px)`;
-});
-
-// FORM
-
 document.getElementById('form').addEventListener('submit', async e=>{
   e.preventDefault();
+
   const email=document.getElementById('email').value;
   const btn=document.querySelector('button');
+
   btn.innerHTML='Accediendo...';
   btn.disabled=true;
-  await fetch('https://formspree.io/f/xgorrabn',{
-    method:'POST',
-    headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({email})
-  });
-  document.getElementById('success').style.display='block';
+
+  try{
+    await fetch('https://formspree.io/f/xgorrabn',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({email})
+    });
+
+    document.getElementById('success').style.display='block';
+  }catch{
+    alert('Error, intenta de nuevo');
+  }
+
   btn.innerHTML='ACCEDER';
   btn.disabled=false;
 });
 
-// APARICIÓN FEATURES
-const features=document.querySelectorAll('.feature');
-const obs=new IntersectionObserver(entries=>{
- entries.forEach(e=>{
-  if(e.isIntersecting) e.target.classList.add('visible');
- });
+// animación al aparecer
+const features = document.querySelectorAll('.feature');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      entry.target.classList.add('visible');
+    }
+  });
 },{threshold:0.2});
-features.forEach(f=>obs.observe(f));
+features.forEach(f=>observer.observe(f));
 
 </script>
 
